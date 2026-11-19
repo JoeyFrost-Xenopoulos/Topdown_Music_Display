@@ -47,6 +47,7 @@ end
 function CoverCollage:loadCollageCovers(record)
     self.covers = {}
     self.coverPaths = {}
+    self.coverMeta = {}
     self.recordId = record.id
     
     local seed = record.id * 12345
@@ -103,6 +104,7 @@ function CoverCollage:close()
     self.active = false
     self.covers = {}
     self.coverPaths = {}
+    self.coverMeta = {}
     self.recordId = nil
 end
 
