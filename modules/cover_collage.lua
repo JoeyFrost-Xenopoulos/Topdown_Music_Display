@@ -1,7 +1,7 @@
 local CoverCollage = {}
 CoverCollage.__index = CoverCollage
 
-local albumData = require("album_data")
+local albumData = require("data.album_data")
 
 function CoverCollage.new()
     local self = setmetatable({}, CoverCollage)

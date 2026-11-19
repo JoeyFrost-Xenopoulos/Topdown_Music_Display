@@ -1,4 +1,4 @@
-local Animation = require("animation")
+local Animation = require("modules.animation")
 
 local Player = {}
 Player.__index = Player

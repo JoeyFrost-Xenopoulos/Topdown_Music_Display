@@ -1,8 +1,8 @@
-local Animation = require("animation")
-local TiledMap = require("tiled_map")
-local Player = require("player")
-local Camera = require("camera")
-local CoverCollage = require("cover_collage")
+local Animation = require("modules.animation")
+local TiledMap = require("modules.tiled_map")
+local Player = require("modules.player")
+local Camera = require("modules.camera")
+local CoverCollage = require("modules.cover_collage")
 
 local TILE_SIZE = 24
 local BEAR_SOURCE_SIZE = 256
