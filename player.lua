@@ -128,9 +128,10 @@ end
 
 function Player:tryInteract(records)
     local hx, hy = self:getHitbox()
+    local interactionRange = 16 -- extra pixels beyond hitbox
     for _, record in ipairs(records) do
-        if hx < record.x + record.w and hx + self.hitboxWidth > record.x and
-           hy < record.y + record.h and hy + self.hitboxHeight > record.y then
+        if hx < record.x + record.w + interactionRange and hx + self.hitboxWidth > record.x - interactionRange and
+           hy < record.y + record.h + interactionRange and hy + self.hitboxHeight > record.y - interactionRange then
             self.interactingRecord = record
             return record
         end
@@ -161,9 +162,10 @@ function Player:drawDebug()
         love.graphics.setColor(1, 1, 1, 1)
         love.graphics.print("Record ID: " .. self.interactingRecord.id, self.x, self.y - 30)
     else
+        local interactionRange = 16
         for _, record in ipairs(self.map.records) do
-            if hx < record.x + record.w and hx + self.hitboxWidth > record.x and
-               hy < record.y + record.h and hy + self.hitboxHeight > record.y then
+            if hx < record.x + record.w + interactionRange and hx + self.hitboxWidth > record.x - interactionRange and
+               hy < record.y + record.h + interactionRange and hy + self.hitboxHeight > record.y - interactionRange then
                 love.graphics.setColor(1, 1, 0, 1)
                 love.graphics.print("[E] Interact", self.x, self.y - 30)
                 break

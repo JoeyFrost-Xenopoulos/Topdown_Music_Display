@@ -1,11 +1,14 @@
 local CoverCollage = {}
 CoverCollage.__index = CoverCollage
 
+local albumData = require("album_data")
+
 function CoverCollage.new()
     local self = setmetatable({}, CoverCollage)
     self.active = false
     self.covers = {}
     self.coverPaths = {}
+    self.coverMeta = {}
     self.coverSize = 160
     self.padding = 8
     self.cols = 3
@@ -24,6 +27,21 @@ function CoverCollage:loadCoverList()
         end
     end
     print("Found " .. #self.allCovers .. " album covers")
+end
+
+function CoverCollage:lookupMeta(path)
+    local filename = path:match("([^/\\]+)%.png$") or ""
+    local meta = albumData[filename] or albumData[filename:lower()]
+    if meta then
+        return meta.album, meta.artist, meta.year
+    end
+    -- Fallback: parse "Artist - Album" from filename
+    local artist, album = filename:match("^(.+) %- (.+)$")
+    if not artist then
+        artist = "Unknown Artist"
+        album = filename
+    end
+    return album, artist, nil
 end
 
 function CoverCollage:loadCollageCovers(record)
@@ -70,6 +88,8 @@ function CoverCollage:loadCollageCovers(record)
             img:setFilter("linear", "linear")
             table.insert(self.covers, img)
             table.insert(self.coverPaths, path)
+            local album, artist, year = self:lookupMeta(path)
+            table.insert(self.coverMeta, { album = album, artist = artist, year = year })
         end
     end
 end
@@ -127,14 +147,11 @@ function CoverCollage:draw()
         for col = 0, self.cols - 1 do
             local idx = row * self.cols + col + 1
             if idx <= #self.covers then
-                local path = self.coverPaths[idx]
-                if path then
-                    local filename = path:match("([^/\\]+)%.png$") or ""
-                    local artist, album = filename:match("^(.+) %- (.+)$")
-                    if not artist then
-                        artist = "Unknown Artist"
-                        album = filename
-                    end
+                local meta = self.coverMeta[idx]
+                if meta then
+                    local album = meta.album
+                    local artist = meta.artist
+                    local year = meta.year
                     
                     local entryY = baseY + col * (self.coverSize / 3)
                     
@@ -143,7 +160,11 @@ function CoverCollage:draw()
                     love.graphics.printf(album, textX, entryY + 4, textWidth, "left")
                     love.graphics.setColor(0.7, 0.7, 0.8, 1)
                     love.graphics.setFont(love.graphics.newFont(11))
-                    love.graphics.printf(artist, textX, entryY + 22, textWidth, "left")
+                    local artistLine = artist
+                    if year then
+                        artistLine = artistLine .. " (" .. year .. ")"
+                    end
+                    love.graphics.printf(artistLine, textX, entryY + 22, textWidth, "left")
                 end
             end
         end
