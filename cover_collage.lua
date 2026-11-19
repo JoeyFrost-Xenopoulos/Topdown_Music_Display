@@ -96,11 +96,15 @@ function CoverCollage:draw()
     local startX = (screenW - gridW) / 2
     local startY = (screenH - gridH) / 2
 
+    local textX = startX + self.cols * (self.coverSize + self.padding) + 24
+    local textWidth = 320
+    local totalW = (textX + textWidth) - (startX - 16) + 16
+
     love.graphics.setColor(0, 0, 0, 0.85)
     love.graphics.rectangle("fill", 0, 0, screenW, screenH)
 
     love.graphics.setColor(0.1, 0.1, 0.15, 1)
-    love.graphics.rectangle("fill", startX - 16, startY - 16, gridW + 32, gridH + 32, 8, 8)
+    love.graphics.rectangle("fill", startX - 16, startY - 16, totalW, gridH + 32, 8, 8)
 
     for i, img in ipairs(self.covers) do
         local col = (i - 1) % self.cols
@@ -116,8 +120,6 @@ function CoverCollage:draw()
         love.graphics.rectangle("line", x, y, self.coverSize, self.coverSize)
     end
 
-    local textX = startX + self.cols * (self.coverSize + self.padding) + 24
-    local textWidth = 320
     local rowHeight = self.coverSize + self.padding
     
     for row = 0, self.rows - 1 do
