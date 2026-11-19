@@ -14,6 +14,14 @@ local player = Player.new(map, TILE_SIZE, BEAR_SOURCE_SIZE)
 local camera = Camera.new(WORLD_SCALE)
 local coverCollage = CoverCollage.new()
 
+local function loadMap(mapPath)
+    map = TiledMap.new(mapPath)
+    player.map = map
+    player.x = map.pixelWidth / 2 - TILE_SIZE / 2
+    player.y = map.pixelHeight / 2 - TILE_SIZE / 2
+    player:resolveSpawnCollision()
+end
+
 function love.load()
     love.graphics.setBackgroundColor(0.08, 0.08, 0.1)
     love.graphics.setDefaultFilter("nearest", "nearest")
@@ -40,6 +48,20 @@ end
 
 function love.update(dt)
     player:update(dt)
+    
+    -- Check for map transitions
+    local hx, hy = player:getHitbox()
+    local transition = map:checkTransition(hx, hy, player.hitboxWidth, player.hitboxHeight)
+    if transition and transition.target_map then
+        local newMapPath = "assets/map/" .. transition.target_map
+        loadMap(newMapPath)
+        -- Override spawn position with transition target
+        player.x = transition.target_x
+        player.y = transition.target_y
+        player:resolveSpawnCollision()
+        coverCollage:close()
+    end
+    
     camera:update(
         player.x, player.y, player.width, player.height,
         map.pixelWidth, map.pixelHeight,

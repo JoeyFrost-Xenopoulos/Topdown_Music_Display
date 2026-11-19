@@ -113,6 +113,24 @@ function TiledMap.new(mapPath)
                         })
                     end
                 end
+            elseif layer.name == "Transition" then
+                map.transitions = {}
+                for _, obj in ipairs(layer.objects or {}) do
+                    if obj.shape == "rectangle" and obj.visible ~= false then
+                        local props = obj.properties or {}
+                        table.insert(map.transitions, {
+                            x = obj.x,
+                            y = obj.y,
+                            w = obj.width,
+                            h = obj.height,
+                            target_map = props.target_map,
+                            target_x = props.target_x,
+                            target_y = props.target_y,
+                            direction = props.direction,
+                            name = obj.name
+                        })
+                    end
+                end
             end
         end
     end
@@ -179,6 +197,16 @@ function TiledMap:checkCollision(x, y, w, h)
         end
     end
     return false
+end
+
+function TiledMap:checkTransition(x, y, w, h)
+    for _, t in ipairs(self.transitions or {}) do
+        if x < t.x + t.w and x + w > t.x and
+           y < t.y + t.h and y + h > t.y then
+            return t
+        end
+    end
+    return nil
 end
 
 return TiledMap

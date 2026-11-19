@@ -9,8 +9,8 @@ return {
   height = 32,
   tilewidth = 24,
   tileheight = 24,
-  nextlayerid = 10,
-  nextobjectid = 48,
+  nextlayerid = 11,
+  nextobjectid = 50,
   properties = {},
   tilesets = {
     {
@@ -223,7 +223,7 @@ return {
       id = 9,
       name = "Records",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -422,6 +422,52 @@ return {
           y = 475,
           width = 77,
           height = 124,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 10,
+      name = "Transition",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 48,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 27,
+          y = 79,
+          width = 62,
+          height = 37,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["target_map"] = "map_2.lua",
+            ["target_x"] = 30,
+            ["target_y"] = 30
+          }
+        },
+        {
+          id = 49,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 554,
+          y = 84,
+          width = 65,
+          height = 33,
           rotation = 0,
           visible = true,
           properties = {}
