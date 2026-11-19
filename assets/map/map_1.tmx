@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="24" tileheight="24" infinite="0" nextlayerid="11" nextobjectid="51">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="24" tileheight="24" infinite="0" nextlayerid="11" nextobjectid="52">
  <editorsettings>
   <export target="map_1.lua" format="lua"/>
  </editorsettings>
@@ -7,20 +7,18 @@
   <image source="libassetpack-tiled.png" trans="000000" width="1488" height="528"/>
  </tileset>
  <objectgroup id="8" name="Wall">
-  <object id="9" x="440" y="333" width="75" height="93"/>
-  <object id="10" x="534" y="339" width="84" height="97"/>
-  <object id="11" x="632" y="337" width="79" height="90"/>
   <object id="12" x="630" y="102" width="89" height="132"/>
   <object id="15" x="328" y="99" width="218" height="138"/>
   <object id="16" x="222" y="133" width="114" height="97"/>
   <object id="17" x="98" y="126" width="88" height="108"/>
   <object id="20" x="182" y="98" width="45" height="123"/>
   <object id="22" x="717" y="96" width="13" height="671"/>
-  <object id="45" x="59" y="334" width="264" height="99"/>
-  <object id="46" x="55" y="474" width="274" height="106"/>
-  <object id="47" x="442" y="484" width="268" height="87"/>
+  <object id="45" x="59" y="375" width="264" height="58"/>
+  <object id="46" x="55" y="520" width="274" height="60"/>
+  <object id="47" x="442" y="521.5" width="268" height="49.5"/>
+  <object id="51" x="439" y="375" width="274.5" height="47"/>
  </objectgroup>
- <objectgroup id="9" name="Records">
+ <objectgroup id="9" name="Records" visible="0">
   <object id="30" x="437" y="337" width="82" height="112"/>
   <object id="31" x="534" y="339" width="80" height="109"/>
   <object id="32" x="441" y="482" width="76" height="113"/>
@@ -37,7 +35,7 @@
   <object id="43" x="150" y="476" width="83" height="116"/>
   <object id="44" x="253" y="475" width="77" height="124"/>
  </objectgroup>
- <objectgroup id="10" name="Transition">
+ <objectgroup id="10" name="Transition" visible="0">
   <object id="48" x="27" y="79" width="62" height="37">
    <properties>
     <property name="target_map" type="file" value="map_2.lua"/>

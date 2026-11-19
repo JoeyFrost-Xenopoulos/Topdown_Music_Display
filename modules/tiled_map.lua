@@ -135,6 +135,54 @@ function TiledMap.new(mapPath)
         end
     end
 
+    -- Parse Bookshelf tiles and compute layer center Y for simple y-sorting
+    map.bookshelfTiles = {}
+    local minY, maxY = math.huge, -math.huge
+    for _, layer in ipairs(map.layers or {}) do
+        if layer.type == "tilelayer" and layer.name == "Bookshelf" then
+            for index, rawGid in ipairs(layer.data) do
+                if rawGid ~= 0 then
+                    local gid = bit.band(rawGid, bit.bnot(FLIP_MASK))
+                    local tileset = map.tilesets[1]
+                    for i = #map.tilesets, 1, -1 do
+                        if gid >= map.tilesets[i].firstgid then
+                            tileset = map.tilesets[i]
+                            break
+                        end
+                    end
+
+                    if tileset.image then
+                        local localId = gid - tileset.firstgid
+                        local columns = tileset.columns
+                        local column = localId % columns
+                        local row = math.floor(localId / columns)
+                        local quad = love.graphics.newQuad(
+                            column * tileset.tilewidth,
+                            row * tileset.tileheight,
+                            tileset.tilewidth,
+                            tileset.tileheight,
+                            tileset.imagewidth,
+                            tileset.imageheight
+                        )
+                        local tileX = (index - 1) % map.width
+                        local tileY = math.floor((index - 1) / map.width)
+                        local worldX = tileX * map.tilewidth
+                        local worldY = tileY * map.tileheight
+                        table.insert(map.bookshelfTiles, {
+                            quad = quad,
+                            tileset = tileset,
+                            x = worldX,
+                            y = worldY,
+                        })
+                        if worldY < minY then minY = worldY end
+                        if worldY > maxY then maxY = worldY end
+                    end
+                end
+            end
+        end
+    end
+    map.bookshelfCenterY = (minY + maxY + map.tileheight) / 2
+
     return setmetatable(map, TiledMap)
 end
 
@@ -207,6 +255,28 @@ function TiledMap:checkTransition(x, y, w, h)
         end
     end
     return nil
+end
+
+function TiledMap:drawBookshelf(playerCenterY)
+    if not self.bookshelfTiles then return end
+    
+    if self.bookshelfCenterY <= playerCenterY then
+        -- Shelf above player: draw behind
+        for _, tile in ipairs(self.bookshelfTiles) do
+            love.graphics.draw(tile.tileset.image, tile.quad, tile.x, tile.y)
+        end
+    end
+end
+
+function TiledMap:drawBookshelfFront(playerCenterY)
+    if not self.bookshelfTiles then return end
+    
+    if self.bookshelfCenterY > playerCenterY then
+        -- Shelf below player: draw in front
+        for _, tile in ipairs(self.bookshelfTiles) do
+            love.graphics.draw(tile.tileset.image, tile.quad, tile.x, tile.y)
+        end
+    end
 end
 
 return TiledMap

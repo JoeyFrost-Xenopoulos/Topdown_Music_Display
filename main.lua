@@ -75,7 +75,16 @@ function love.draw()
     camera:apply()
 
     map:draw()
+    
+    local playerCenterY = player.y + player.height / 2
+    
+    -- Bookshelf tiles behind player
+    map:drawBookshelf(playerCenterY)
+    
     player:draw()
+    
+    -- Bookshelf tiles in front of player
+    map:drawBookshelfFront(playerCenterY)
 
     love.graphics.setColor(1, 0, 0, 0.5)
     for _, wall in ipairs(map.walls) do
