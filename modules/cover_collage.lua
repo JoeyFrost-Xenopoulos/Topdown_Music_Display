@@ -20,13 +20,13 @@ end
 
 function CoverCollage:loadCoverList()
     self.allCovers = {}
-    local files = love.filesystem.getDirectoryItems("assets/covers")
+    local files = love.filesystem.getDirectoryItems("assets/covers_thumb")
     for _, file in ipairs(files) do
         if file:match("%.png$") then
-            table.insert(self.allCovers, "assets/covers/" .. file)
+            table.insert(self.allCovers, "assets/covers_thumb/" .. file)
         end
     end
-    print("Found " .. #self.allCovers .. " album covers")
+    print("Found " .. #self.allCovers .. " album cover thumbnails")
 end
 
 function CoverCollage:lookupMeta(path)
