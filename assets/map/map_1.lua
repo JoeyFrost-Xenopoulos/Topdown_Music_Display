@@ -10,7 +10,7 @@ return {
   tilewidth = 24,
   tileheight = 24,
   nextlayerid = 11,
-  nextobjectid = 50,
+  nextobjectid = 51,
   properties = {},
   tilesets = {
     {
@@ -196,7 +196,7 @@ return {
           shape = "rectangle",
           x = 55,
           y = 474,
-          width = 267,
+          width = 274,
           height = 106,
           rotation = 0,
           visible = true,
@@ -455,8 +455,8 @@ return {
           visible = true,
           properties = {
             ["target_map"] = "map_2.lua",
-            ["target_x"] = 30,
-            ["target_y"] = 30
+            ["target_x"] = 78,
+            ["target_y"] = 651
           }
         },
         {
