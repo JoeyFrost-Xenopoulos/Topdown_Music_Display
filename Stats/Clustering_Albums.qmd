@@ -1,0 +1,32 @@
+---
+title: "Clustering_Albums"
+format: html
+---
+
+```{r}
+library(RKaggle)
+data <- RKaggle::get_dataset("maharshipandya/-spotify-tracks-dataset")
+head(data)
+```
+
+My album library
+
+```{r}
+jfx_lib <- read.csv("C:/Users/joey7/Documents/Walk_Music/Albums_clean.csv")
+head(jfx_lib)
+```
+
+Albums from mine that match the dataset
+
+```{r}
+library(dplyr)
+
+matching_albums <- intersect(data$album_name, jfx_lib$album)
+
+dat <- data |>
+  filter(album_name %in% matching_albums)
+
+dat
+```
+
+

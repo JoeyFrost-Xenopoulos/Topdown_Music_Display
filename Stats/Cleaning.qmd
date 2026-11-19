@@ -1,0 +1,49 @@
+---
+title: "Cleaning"
+format: pdf
+---
+
+Loading in the .txt file
+
+```{r}
+# Read the text file
+albums_raw <- readLines("Albums.txt")
+
+# Remove blank lines
+albums_raw <- albums_raw[albums_raw != ""]
+```
+
+Seperate album name, artist
+
+```{r}
+# Album names are in odd-numbered rows
+album_names <- albums_raw[seq(1, length(albums_raw), by = 2)]
+
+# Artist and year are in even-numbered rows
+artist_year <- albums_raw[seq(2, length(albums_raw), by = 2)]
+
+# Split artist/year information
+split_info <- strsplit(artist_year, " • ")
+
+# Extract artist
+artists <- sapply(split_info, function(x) x[2])
+
+# Extract year
+years <- sapply(split_info, function(x) x[3])
+```
+
+```{r}
+albums_df <- data.frame(
+  album = album_names,
+  artist = artists,
+  year = as.numeric(years)
+)
+```
+
+Save new dataframe as .csv
+
+```{r}
+write.csv(albums_df, "Albums_clean.csv", row.names = FALSE)
+```
+
+
