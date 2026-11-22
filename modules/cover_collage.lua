@@ -137,17 +137,18 @@ function CoverCollage:draw()
 
     local rowHeight = self.coverSize + self.padding
     
+    local textRowHeight = 36
+    local textStartY = startY
+    
     for i, meta in ipairs(self.coverMeta) do
-        local row = math.floor((i - 1) / self.cols)
-        local baseY = startY + row * rowHeight
-        local entryY = baseY + (self.coverSize / 2) - 18
+        local entryY = textStartY + (i - 1) * textRowHeight
         
         local album = meta.album
         local artist = meta.artist
         local year = meta.year
         
         love.graphics.setColor(0.9, 0.9, 0.95, 1)
-        love.graphics.setFont(love.graphics.newFont(14))
+        love.graphics.setFont(love.graphics.newFont(13))
         love.graphics.printf(album, textX, entryY, textWidth, "left")
         love.graphics.setColor(0.7, 0.7, 0.8, 1)
         love.graphics.setFont(love.graphics.newFont(11))
@@ -155,7 +156,7 @@ function CoverCollage:draw()
         if year then
             artistLine = artistLine .. " (" .. year .. ")"
         end
-        love.graphics.printf(artistLine, textX, entryY + 22, textWidth, "left")
+        love.graphics.printf(artistLine, textX, entryY + 18, textWidth, "left")
     end
     love.graphics.setFont(love.graphics.newFont(12))
 
