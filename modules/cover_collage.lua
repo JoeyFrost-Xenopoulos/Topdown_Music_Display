@@ -54,21 +54,10 @@ function CoverCollage:loadCollageCovers(record)
     local rng = love.math.newRandomGenerator(seed)
     
     local numCovers = 9
-    -- Explicitly set layout every time to avoid state persistence bugs
-    if record.id == 30 then
-        self.cols = 3
-        self.rows = 3
-        self.coverSize = 160
-    elseif record.id == 31 then
-        self.cols = 4
-        self.rows = 2
-        self.coverSize = 140
-        numCovers = 8
-    else
-        self.cols = 3
-        self.rows = 3
-        self.coverSize = 160
-    end
+    -- All records use 3x3 layout
+    self.cols = 3
+    self.rows = 3
+    self.coverSize = 160
     
     print(string.format("CoverCollage: record.id=%d, layout=%dx%d, coverSize=%d, numCovers=%d", 
         record.id, self.cols, self.rows, self.coverSize, numCovers))
@@ -148,32 +137,25 @@ function CoverCollage:draw()
 
     local rowHeight = self.coverSize + self.padding
     
-    for row = 0, self.rows - 1 do
+    for i, meta in ipairs(self.coverMeta) do
+        local row = math.floor((i - 1) / self.cols)
         local baseY = startY + row * rowHeight
-        for col = 0, self.cols - 1 do
-            local idx = row * self.cols + col + 1
-            if idx <= #self.covers then
-                local meta = self.coverMeta[idx]
-                if meta then
-                    local album = meta.album
-                    local artist = meta.artist
-                    local year = meta.year
-                    
-                    local entryY = baseY + (self.coverSize / 2) - 18
-                    
-                    love.graphics.setColor(0.9, 0.9, 0.95, 1)
-                    love.graphics.setFont(love.graphics.newFont(14))
-                    love.graphics.printf(album, textX, entryY, textWidth, "left")
-                    love.graphics.setColor(0.7, 0.7, 0.8, 1)
-                    love.graphics.setFont(love.graphics.newFont(11))
-                    local artistLine = artist
-                    if year then
-                        artistLine = artistLine .. " (" .. year .. ")"
-                    end
-                    love.graphics.printf(artistLine, textX, entryY + 22, textWidth, "left")
-                end
-            end
+        local entryY = baseY + (self.coverSize / 2) - 18
+        
+        local album = meta.album
+        local artist = meta.artist
+        local year = meta.year
+        
+        love.graphics.setColor(0.9, 0.9, 0.95, 1)
+        love.graphics.setFont(love.graphics.newFont(14))
+        love.graphics.printf(album, textX, entryY, textWidth, "left")
+        love.graphics.setColor(0.7, 0.7, 0.8, 1)
+        love.graphics.setFont(love.graphics.newFont(11))
+        local artistLine = artist
+        if year then
+            artistLine = artistLine .. " (" .. year .. ")"
         end
+        love.graphics.printf(artistLine, textX, entryY + 22, textWidth, "left")
     end
     love.graphics.setFont(love.graphics.newFont(12))
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="24" tileheight="24" infinite="0" nextlayerid="4" nextobjectid="2">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="24" tileheight="24" infinite="0" nextlayerid="5" nextobjectid="7">
  <tileset firstgid="1" name="libassetpack-tiled" tilewidth="24" tileheight="24" tilecount="1364" columns="62">
   <image source="libassetpack-tiled.png" trans="000000" width="1488" height="528"/>
  </tileset>
- <objectgroup id="3" name="Transition">
+ <objectgroup id="3" name="Transition" visible="0">
   <object id="1" x="48" y="698" width="74" height="69">
    <properties>
     <property name="target_map" type="file" value="map_1.lua"/>
@@ -11,6 +11,13 @@
     <property name="target_y" type="float" value="272"/>
    </properties>
   </object>
+ </objectgroup>
+ <objectgroup id="4" name="Wall">
+  <object id="2" x="126" y="674" width="122" height="95"/>
+  <object id="3" x="248" y="710" width="108" height="57"/>
+  <object id="4" x="350" y="675" width="245" height="94"/>
+  <object id="5" x="677" y="674" width="91" height="95"/>
+  <object id="6" x="1" y="677" width="43" height="90"/>
  </objectgroup>
  <layer id="1" name="Floor" width="32" height="32">
   <data encoding="csv">

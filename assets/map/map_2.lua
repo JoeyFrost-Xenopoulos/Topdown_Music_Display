@@ -9,8 +9,8 @@ return {
   height = 32,
   tilewidth = 24,
   tileheight = 24,
-  nextlayerid = 4,
-  nextobjectid = 2,
+  nextlayerid = 5,
+  nextobjectid = 7,
   properties = {},
   tilesets = {
     {
@@ -51,7 +51,7 @@ return {
       id = 3,
       name = "Transition",
       class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -75,6 +75,87 @@ return {
             ["target_x"] = 58,
             ["target_y"] = 272
           }
+        }
+      }
+    },
+    {
+      type = "objectgroup",
+      draworder = "topdown",
+      id = 4,
+      name = "Wall",
+      class = "",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      parallaxx = 1,
+      parallaxy = 1,
+      properties = {},
+      objects = {
+        {
+          id = 2,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 126,
+          y = 674,
+          width = 122,
+          height = 95,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 3,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 248,
+          y = 710,
+          width = 108,
+          height = 57,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 4,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 350,
+          y = 675,
+          width = 245,
+          height = 94,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 5,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 677,
+          y = 674,
+          width = 91,
+          height = 95,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 6,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 1,
+          y = 677,
+          width = 43,
+          height = 90,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     },
