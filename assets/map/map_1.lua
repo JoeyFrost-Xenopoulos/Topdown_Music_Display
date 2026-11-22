@@ -42,6 +42,66 @@ return {
       wangsets = {},
       tilecount = 1364,
       tiles = {}
+    },
+    {
+      name = "Interiors_free_48x48",
+      firstgid = 1365,
+      class = "",
+      tilewidth = 24,
+      tileheight = 24,
+      spacing = 0,
+      margin = 0,
+      columns = 32,
+      image = "Interiors_free_48x48.png",
+      imagewidth = 768,
+      imageheight = 4272,
+      transparentcolor = "#000000",
+      objectalignment = "unspecified",
+      tilerendersize = "tile",
+      fillmode = "stretch",
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 24,
+        height = 24
+      },
+      properties = {},
+      wangsets = {},
+      tilecount = 5696,
+      tiles = {}
+    },
+    {
+      name = "Room_Builder_free_48x48",
+      firstgid = 7061,
+      class = "",
+      tilewidth = 24,
+      tileheight = 24,
+      spacing = 0,
+      margin = 0,
+      columns = 34,
+      image = "Room_Builder_free_48x48.png",
+      imagewidth = 816,
+      imageheight = 1104,
+      transparentcolor = "#000000",
+      objectalignment = "unspecified",
+      tilerendersize = "tile",
+      fillmode = "stretch",
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 24,
+        height = 24
+      },
+      properties = {},
+      wangsets = {},
+      tilecount = 1564,
+      tiles = {}
     }
   },
   layers = {
@@ -210,7 +270,7 @@ return {
       id = 9,
       name = "Records",
       class = "",
-      visible = false,
+      visible = true,
       opacity = 1,
       offsetx = 0,
       offsety = 0,
@@ -327,8 +387,8 @@ return {
           name = "",
           type = "",
           shape = "rectangle",
-          x = 108,
-          y = 149,
+          x = 132,
+          y = 147,
           width = 74,
           height = 111,
           rotation = 0,
@@ -434,7 +494,7 @@ return {
       id = 10,
       name = "Transition",
       class = "",
-      visible = true,
+      visible = false,
       opacity = 1,
       offsetx = 0,
       offsety = 0,

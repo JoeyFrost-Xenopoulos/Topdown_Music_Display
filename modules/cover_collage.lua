@@ -121,32 +121,50 @@ function CoverCollage:draw()
     love.graphics.setColor(0.1, 0.1, 0.15, 1)
     love.graphics.rectangle("fill", startX - 16, startY - 16, totalW, gridH + 32, 8, 8)
 
+    local mx, my = love.mouse.getPosition()
+    local time = love.timer.getTime()
+
     for i, img in ipairs(self.covers) do
         local col = (i - 1) % self.cols
         local row = math.floor((i - 1) / self.cols)
         local x = startX + col * (self.coverSize + self.padding)
         local y = startY + row * (self.coverSize + self.padding)
 
-        local scale = self.coverSize / math.max(img:getWidth(), img:getHeight())
-        love.graphics.setColor(1, 1, 1, 1)
-        love.graphics.draw(img, x, y, 0, scale, scale)
+        -- Hover detection
+        local hovered = mx >= x and mx <= x + self.coverSize and
+                        my >= y and my <= y + self.coverSize
 
-        love.graphics.setColor(0.3, 0.3, 0.4, 1)
-        love.graphics.rectangle("line", x, y, self.coverSize, self.coverSize)
+        -- Animation values
+        local drawScale = 1.0
+        local drawRot = 0
+        local offsetY = 0
+
+        if hovered then
+            drawScale = 1.08
+            offsetY = -8
+            drawRot = math.sin(time * 6) * 0.02
+        end
+
+        local imgScale = self.coverSize / math.max(img:getWidth(), img:getHeight()) * drawScale
+
+        love.graphics.push()
+        love.graphics.translate(x + self.coverSize/2, y + self.coverSize/2 + offsetY)
+        love.graphics.rotate(drawRot)
+        love.graphics.setColor(1, 1, 1, 1)
+        love.graphics.draw(img, -self.coverSize/2 * drawScale, -self.coverSize/2 * drawScale, 0, imgScale, imgScale)
+        love.graphics.pop()
     end
 
-    local rowHeight = self.coverSize + self.padding
-    
     local textRowHeight = 36
     local textStartY = startY
-    
+
     for i, meta in ipairs(self.coverMeta) do
         local entryY = textStartY + (i - 1) * textRowHeight
-        
+
         local album = meta.album
         local artist = meta.artist
         local year = meta.year
-        
+
         love.graphics.setColor(0.9, 0.9, 0.95, 1)
         love.graphics.setFont(love.graphics.newFont(13))
         love.graphics.printf(album, textX, entryY, textWidth, "left")
