@@ -155,11 +155,11 @@ function CoverCollage:draw()
                     local artist = meta.artist
                     local year = meta.year
                     
-                    local entryY = baseY + col * (self.coverSize / 3)
+                    local entryY = baseY + (self.coverSize / 2) - 18
                     
                     love.graphics.setColor(0.9, 0.9, 0.95, 1)
                     love.graphics.setFont(love.graphics.newFont(14))
-                    love.graphics.printf(album, textX, entryY + 4, textWidth, "left")
+                    love.graphics.printf(album, textX, entryY, textWidth, "left")
                     love.graphics.setColor(0.7, 0.7, 0.8, 1)
                     love.graphics.setFont(love.graphics.newFont(11))
                     local artistLine = artist
