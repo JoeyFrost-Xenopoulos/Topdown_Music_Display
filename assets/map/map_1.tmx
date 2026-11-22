@@ -6,7 +6,7 @@
  <tileset firstgid="1" name="libassetpack-tiled" tilewidth="24" tileheight="24" tilecount="1364" columns="62">
   <image source="libassetpack-tiled.png" trans="000000" width="1488" height="528"/>
  </tileset>
- <objectgroup id="8" name="Wall">
+ <objectgroup id="8" name="Wall" visible="0">
   <object id="12" x="630" y="102" width="89" height="132"/>
   <object id="15" x="328" y="99" width="218" height="138"/>
   <object id="16" x="222" y="133" width="114" height="96.5"/>
@@ -30,15 +30,15 @@
   <object id="37" x="61" y="342" width="76" height="110"/>
   <object id="38" x="108" y="149" width="74" height="111"/>
   <object id="39" x="346" y="150" width="74" height="110"/>
-  <object id="40" x="465" y="145" width="78" height="118"/>
+  <object id="40" x="439" y="140" width="78" height="118"/>
   <object id="41" x="629" y="142" width="84" height="125"/>
   <object id="42" x="59" y="480" width="78" height="115"/>
   <object id="43" x="150" y="476" width="83" height="116"/>
   <object id="44" x="253" y="475" width="77" height="124"/>
   <object id="52" x="629.5" y="337.5" width="81" height="113.5"/>
  </objectgroup>
- <objectgroup id="10" name="Transition" visible="0">
-  <object id="48" x="27" y="79" width="62" height="37">
+ <objectgroup id="10" name="Transition">
+  <object id="48" x="28" y="96" width="62" height="37">
    <properties>
     <property name="target_map" type="file" value="map_2.lua"/>
     <property name="target_x" type="float" value="78"/>

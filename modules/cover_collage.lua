@@ -54,6 +54,7 @@ function CoverCollage:loadCollageCovers(record)
     local rng = love.math.newRandomGenerator(seed)
     
     local numCovers = 9
+    -- Explicitly set layout every time to avoid state persistence bugs
     if record.id == 30 then
         self.cols = 3
         self.rows = 3
@@ -68,6 +69,9 @@ function CoverCollage:loadCollageCovers(record)
         self.rows = 3
         self.coverSize = 160
     end
+    
+    print(string.format("CoverCollage: record.id=%d, layout=%dx%d, coverSize=%d, numCovers=%d", 
+        record.id, self.cols, self.rows, self.coverSize, numCovers))
     
     local totalCovers = #self.allCovers
     local usedIndices = {}
